@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+
 
 namespace TermProject_S1.Models
 {
@@ -23,5 +20,7 @@ namespace TermProject_S1.Models
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
         public double Discount { get; set; }
+        public int CustomerGradeID { get; set; }
+        public CustomerGrade CustomerGrade { get; set; }
     }
 }

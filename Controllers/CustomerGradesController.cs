@@ -7,24 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TermProject_S1.Models;
 
-namespace TermProject_S1.Controllers
+namespace TermProject_S1.Views
 {
-    public class CustomerController : Controller
+    public class CustomerGradesController : Controller
     {
         private readonly SwiftMaidsContext _context;
 
-        public CustomerController(SwiftMaidsContext context)
+        public CustomerGradesController(SwiftMaidsContext context)
         {
             _context = context;
         }
 
-        // GET: Customer
+        // GET: CustomerGrades
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Customer.Include(a => a.CustomerGrade).ToListAsync());
+            return View(await _context.CustomerGrades.ToListAsync());
         }
 
-        // GET: Customer/Details/5
+        // GET: CustomerGrades/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,41 +32,39 @@ namespace TermProject_S1.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            var customerGrade = await _context.CustomerGrades
+                .FirstOrDefaultAsync(m => m.CustomerGradeID == id);
+            if (customerGrade == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(customerGrade);
         }
 
-        // GET: Customer/Create
+        // GET: CustomerGrades/Create
         public IActionResult Create()
         {
-            ViewData["CustomerGradeID"] = new SelectList(_context.CustomerGrades, "CustomerGradeID", "CustomerGradeID");
             return View();
         }
 
-        // POST: Customer/Create
+        // POST: CustomerGrades/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,ZipCode,EmailAddress,PhoneNumber,Discount,CustomerGradeID")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerGradeID,CustomerSalesLevel")] CustomerGrade customerGrade)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(customer);
+                _context.Add(customerGrade);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerGradeID"] = new SelectList(_context.CustomerGrades, "CustomerGradeID", "CustomerGradeID");
-            return View(customer);
+            return View(customerGrade);
         }
 
-        // GET: Customer/Edit/5
+        // GET: CustomerGrades/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,23 +72,22 @@ namespace TermProject_S1.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer == null)
+            var customerGrade = await _context.CustomerGrades.FindAsync(id);
+            if (customerGrade == null)
             {
                 return NotFound();
             }
-            ViewData["CustomerGradeID"] = new SelectList(_context.CustomerGrades, "CustomerGradeID", "CustomerGradeID");
-            return View(customer);
+            return View(customerGrade);
         }
 
-        // POST: Customer/Edit/5
+        // POST: CustomerGrades/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,ZipCode,EmailAddress,PhoneNumber,Discount,CustomerGradeID")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("CustomerGradeID,CustomerSalesLevel")] CustomerGrade customerGrade)
         {
-            if (id != customer.Id)
+            if (id != customerGrade.CustomerGradeID)
             {
                 return NotFound();
             }
@@ -99,12 +96,12 @@ namespace TermProject_S1.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
+                    _context.Update(customerGrade);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(customer.Id))
+                    if (!CustomerGradeExists(customerGrade.CustomerGradeID))
                     {
                         return NotFound();
                     }
@@ -115,11 +112,10 @@ namespace TermProject_S1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerGradeID"] = new SelectList(_context.CustomerGrades, "CustomerGradeID", "CustomerGradeID");
-            return View(customer);
+            return View(customerGrade);
         }
 
-        // GET: Customer/Delete/5
+        // GET: CustomerGrades/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,30 +123,30 @@ namespace TermProject_S1.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            var customerGrade = await _context.CustomerGrades
+                .FirstOrDefaultAsync(m => m.CustomerGradeID == id);
+            if (customerGrade == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(customerGrade);
         }
 
-        // POST: Customer/Delete/5
+        // POST: CustomerGrades/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customer = await _context.Customer.FindAsync(id);
-            _context.Customer.Remove(customer);
+            var customerGrade = await _context.CustomerGrades.FindAsync(id);
+            _context.CustomerGrades.Remove(customerGrade);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerExists(int id)
+        private bool CustomerGradeExists(int id)
         {
-            return _context.Customer.Any(e => e.Id == id);
+            return _context.CustomerGrades.Any(e => e.CustomerGradeID == id);
         }
     }
 }

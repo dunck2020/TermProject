@@ -14,9 +14,37 @@ namespace TermProject_S1.Models
         { }
 
         public DbSet<Customer> Customer { get; set; }
+        public DbSet<CustomerGrade> CustomerGrades { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CustomerGrade>().HasData(
+                new CustomerGrade
+                {
+                    CustomerGradeID = 1,
+                    CustomerSalesLevel = "A"
+                },
+                new CustomerGrade
+                {
+                    CustomerGradeID = 2,
+                    CustomerSalesLevel = "B"
+                },
+                new CustomerGrade
+                {
+                    CustomerGradeID = 3,
+                    CustomerSalesLevel = "C"
+                },
+                new CustomerGrade
+                {
+                    CustomerGradeID = 4,
+                    CustomerSalesLevel = "D"
+                },
+                new CustomerGrade
+                {
+                    CustomerGradeID = 5,
+                    CustomerSalesLevel = "E"
+                });
+
             modelBuilder.Entity<Customer>().HasData(
                     new Customer
                     {
@@ -28,7 +56,8 @@ namespace TermProject_S1.Models
                         ZipCode = "49684",
                         PhoneNumber = "231-555-9999",
                         EmailAddress = "jacksfishmarket@hotmail.com",
-                        Discount = .10
+                        Discount = .10,
+                        CustomerGradeID = 1
                     },
                     new Customer
                     {
@@ -39,6 +68,7 @@ namespace TermProject_S1.Models
                         State = "MI",
                         ZipCode = "49686",
                         PhoneNumber = "231-555-5555",
+                        CustomerGradeID = 3
                     },
                     new Customer
                     {
@@ -47,7 +77,8 @@ namespace TermProject_S1.Models
                         Address = "231 8th St",
                         City = "Traverse City",
                         State = "MI",
-                        ZipCode = "49684"
+                        ZipCode = "49684",
+                        CustomerGradeID = 2
                     });
         }
     }
