@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TermProject_S1.Models;
 
 namespace TermProject_S1.Migrations
 {
     [DbContext(typeof(SwiftMaidsContext))]
-    partial class SwiftMaidsContextModelSnapshot : ModelSnapshot
+    [Migration("20211031191104_emailtoseed")]
+    partial class emailtoseed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +37,6 @@ namespace TermProject_S1.Migrations
                         .HasMaxLength(30);
 
                     b.Property<int>("CustomerGradeID")
-                        .HasColumnName("Customer Sales Level")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CustomerSince")
@@ -45,6 +46,7 @@ namespace TermProject_S1.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("EmailAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

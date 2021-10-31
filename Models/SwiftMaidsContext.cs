@@ -45,7 +45,7 @@ namespace TermProject_S1.Models
                     CustomerSalesLevel = "E"
                 });
 
-            modelBuilder.Entity<Customer>().HasData(
+            _ = modelBuilder.Entity<Customer>().HasData(
                     new Customer
                     {
                         Id = 1,
@@ -58,6 +58,8 @@ namespace TermProject_S1.Models
                         EmailAddress = "jacksfishmarket@hotmail.com",
                         Discount = .10,
                         CustomerGradeID = 1
+                        
+
                     },
                     new Customer
                     {
@@ -68,6 +70,7 @@ namespace TermProject_S1.Models
                         State = "MI",
                         ZipCode = "49686",
                         PhoneNumber = "231-555-5555",
+                        EmailAddress = "ProCabs@hotmail.com",
                         CustomerGradeID = 3
                     },
                     new Customer
@@ -78,6 +81,7 @@ namespace TermProject_S1.Models
                         City = "Traverse City",
                         State = "MI",
                         ZipCode = "49684",
+                        EmailAddress = "UNFS@hotmail.com",
                         CustomerGradeID = 2
                     });
         }

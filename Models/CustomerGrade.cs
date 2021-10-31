@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TermProject_S1.Models
 {
     public class CustomerGrade
     {
+        [Key]
         public int CustomerGradeID { get; set; }
         public string CustomerSalesLevel { get; set; }
 

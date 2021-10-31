@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TermProject_S1.Models;
 
 namespace TermProject_S1.Migrations
 {
     [DbContext(typeof(SwiftMaidsContext))]
-    partial class SwiftMaidsContextModelSnapshot : ModelSnapshot
+    [Migration("20211031191415_emailcorrection")]
+    partial class emailcorrection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
